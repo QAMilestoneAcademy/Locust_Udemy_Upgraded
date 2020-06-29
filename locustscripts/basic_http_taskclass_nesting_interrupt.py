@@ -1,5 +1,12 @@
 from locust import HttpUser,SequentialTaskSet,TaskSet,task,between
 import re
+import sys
+import random
+sys.path.append("C:\MyLocustProjects\Demo_LocustProject")
+
+from utilities.csvreader import CSVReader
+
+my_reader=CSVReader("C:\MyLocustProjects\Demo_LocustProject\data\credential_csv_borland.csv").read_data()
 
 class UserBehaviour(TaskSet):
 
@@ -10,6 +17,14 @@ class UserBehaviour(TaskSet):
         self.viewstate = ""
 
     def on_start(self):
+        self.userName=""
+        self.Password=""
+
+        self.userName = random.choice(my_reader)['UserName']
+        self.Password = random.choice(my_reader)['Password']
+        print(self.userName, self.Password)
+        print(my_reader)
+
         print("I will launch URL")
         res = self.client.get("/InsuranceWebExtJS/index.jsf", name="launchURL",
                               headers={"Cache-Control": "no-cache"})
@@ -19,8 +34,8 @@ class UserBehaviour(TaskSet):
         self.viewstate = re1[0]
 
         with self.client.post("/InsuranceWebExtJS/index.jsf"
-                , data={"login-form": "login-form", "login-form:email": "qamile2@gmail.com"
-                    , "login-form:password": "abc123", "login-form:login.x": "57"
+                , data={"login-form": "login-form", "login-form:email": self.userName
+                    , "login-form:password": self.Password, "login-form:login.x": "57"
                     , "login-form:login.y": "9", "javax.faces.ViewState": self.viewstate}
                 , cookies={"JSESSIONID": self.jsession_id}, name="login", catch_response=True) as res1:
             if ("Logged in") not in res1.text:
