@@ -4,6 +4,7 @@ import sys
 import random
 import os
 import logging
+import time
 
 Root_Dir=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -104,7 +105,7 @@ class UserBehaviour(SequentialTaskSet):
         self.Password = random.choice(my_reader)['Password']
 
         with self.client.get("/", name="launchURL", catch_response=True) as resp:
-
+            time.sleep(2)
             if resp.status_code == 200:
                 resp.success()
                 logger.info("URL Launched")
@@ -119,6 +120,7 @@ class UserBehaviour(SequentialTaskSet):
         with self.client.post("/login.php", name="login", data={"action": "process","userName": self.userName,
                                                            "password": self.Password,"login.x": "41","login.y": "12"}, catch_response=True) as resp:
 
+            time.sleep(2)
             if ("Find a Flight") in resp.text:
                 resp.success()
                 logger.info("login successful \t" +self.userName)
@@ -133,6 +135,7 @@ class UserBehaviour(SequentialTaskSet):
 
         #Select a Flight
         with self.client.post("/mercuryreservation2.php", data=formdata1,name="Find_Flight",catch_response=True) as res_1:
+            time.sleep(2)
             if("Select a Flight") in res_1.text:
                 res_1.success()
                 logger.info("find flight successful \t" + self.userName)
@@ -146,7 +149,9 @@ class UserBehaviour(SequentialTaskSet):
 
         #Book a Flight
         with self.client.post("/mercurypurchase.php", data=formdata2,name="Select_Flight",catch_response=True) as res_2:
+            time.sleep(2)
             if("Book a Flight") in res_2.text:
+
                 res_2.success()
                 logger.info("Select a Flight successful \t" + self.userName)
             else:
@@ -158,6 +163,7 @@ class UserBehaviour(SequentialTaskSet):
 
         #Flight Confirmation
         with self.client.post("/mercurypurchase2.php", data=formdata3,name="Book_Flight",catch_response=True) as res_3:
+            time.sleep(2)
             if("Flight Confirmation") in res_3.text:
                 res_3.success()
                 logger.info("Book a Flight successful \t" + self.userName)
