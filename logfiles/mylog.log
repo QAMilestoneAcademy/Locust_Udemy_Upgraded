@@ -1,9 +1,0 @@
-[2020-06-08 06:12:06,502] AnuPC/WARNING/locust.main: System open file limit setting is not high enough for load testing, and the OS wouldnt allow locust to increase it by itself. See https://docs.locust.io/en/stable/installation.html#increasing-maximum-number-of-open-files-limit for more info.
-[2020-06-08 06:12:06,503] AnuPC/INFO/locust.main: Run time limit set to 10 seconds
-[2020-06-08 06:12:06,503] AnuPC/INFO/locust.main: Starting Locust 1.0.2
-[2020-06-08 06:12:06,504] AnuPC/INFO/locust.runners: Hatching and swarming 5 users at the rate 1 users/s (0 users already running)...
-[2020-06-08 06:12:10,517] AnuPC/INFO/locust.runners: All users hatched: MyUser: 5 (0 already running)
-[2020-06-08 06:12:15,934] AnuPC/INFO/locust.main: Time limit reached. Stopping Locust.
-[2020-06-08 06:12:15,982] AnuPC/INFO/locust.main: Shutting down (exit code 0), bye.
-[2020-06-08 06:12:15,982] AnuPC/INFO/locust.main: Cleaning up runner...
-[2020-06-08 06:12:15,982] AnuPC/INFO/locust.main: Running teardowns...
