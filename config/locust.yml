@@ -1,0 +1,10 @@
+#For configuring locust script
+[locust script]
+locustfile: CompleteBookingSolution_MutipleUser_ExternalCSV.py
+host: http://newtours1.demoaut.com
+
+#[locust headless]
+#headless: true
+#users:5
+#hatch-rate: 1
+#run-time: 30s

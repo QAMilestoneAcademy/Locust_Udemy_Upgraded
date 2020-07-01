@@ -1,0 +1,28 @@
+#For configuring locust script
+[locust script]
+locustfile: CompleteBookingSolution_MutipleUser_ExternalCSV.py
+host: http://newtours.demoaut.com
+
+#For configuring master mode
+[locust master mode]
+master: true
+expect-workers: 2
+
+#For configuring step load model
+[locust stepload]
+step-load: true
+step-users: 4
+step-time: 2
+
+[locust headless]
+headless: true
+users:5
+hatch-rate: 1
+run-time: 20s
+
+
+
+
+
+
+

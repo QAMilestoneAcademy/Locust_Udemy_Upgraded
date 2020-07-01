@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  master:
+    image: locustio/locust
+    ports:
+     - "8089:8089"
+    volumes:
+      - /home/ec2-user/Demo_LocustProject:/mnt/locust
+    command: -f /mnt/locust/locustscripts/CompleteBookingSolution_MutipleUser_ExternalCSV.py config=/mnt/locust/config/master.yaml
+
+  worker1:
+    image: locustio/locust
+    volumes:
+      - /home/ec2-user/Demo_LocustProject:/mnt/locust
+    command: -f /mnt/locust/locustscripts/CompleteBookingSolution_MutipleUser_ExternalCSV.py config=/mnt/locust/config/worker.yaml --logfile /mnt/locust/logfiles/worker1_log.log
+
+  worker2:
+   image: locustio/locust
+   volumes:
+      - /home/ec2-user/Demo_LocustProject:/mnt/locust
+   command: config=/mnt/locust/config/worker.yaml --logfile /mnt/locust/logfiles/worker2_log.log
